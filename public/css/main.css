@@ -1,0 +1,41 @@
+:root {
+    --color-background: #f5f7fa;
+    --color-header-footer: #1f2937;
+    --color-accent: #2563eb;
+    --color-accent-hover: #1d4ed8;
+    --color-button: #2563eb;
+    --color-button-hover: #1e40af;
+    --color-text: #111827;
+    --color-text-secondary: #6b7280;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: var(--color-header-footer);
+    color: var(--color-background);
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: var(--color-background);
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: var(--color-accent-hover);
+}
