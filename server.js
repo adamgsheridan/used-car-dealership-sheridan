@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import pool from './src/models/db.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,6 +42,17 @@ app.get("/about", (req, res) => {
 // Contact Page
 app.get("/contact", (req, res) => {
     res.render("contact");
+});
+
+// Database Test Route
+app.get("/db-test", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM vehicles");
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Database connection failed: " + err.message);
+    }
 });
 
 app.listen(PORT, () => {
