@@ -20,8 +20,14 @@ app.get("/", (req, res) => {
 });
 
 // Inventory Page
-app.get("/inventory", (req, res) => {
-    res.render("inventory");
+app.get("/inventory", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM vehicles");
+        res.render("inventory", {vehicles: result.rows });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error loading inventory");
+    }
 });
 
 // Financing Page

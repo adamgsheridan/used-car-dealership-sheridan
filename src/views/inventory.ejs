@@ -1,6 +1,13 @@
 <%- include('partials/header') %>
 <main>
     <h1>Inventory Page</h1>
-    <p>Come look at our inventory</p>
+    <p>Come look at our inventory of vehicles</p>
+    <% vehicles.forEach(vehicle => { %>
+        <div class="vehicle-card">
+            <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
+            <p>$<%= vehicle.price %></p>
+            <p><%= vehicle.description %></p>
+        </div>
+    <% }); %>
 </main>
 <%- include('partials/footer') %>
