@@ -1,13 +1,21 @@
 <%- include('partials/header') %>
 <main>
-    <h1>Inventory Page</h1>
-    <p>Come look at our inventory of vehicles</p>
-    <% vehicles.forEach(vehicle => { %>
-        <div class="vehicle-card">
-            <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
-            <p>$<%= vehicle.price %></p>
-            <p><%= vehicle.description %></p>
+    <div class="inventory-title">
+        <h1>Inventory Page</h1>
+        <p>Come look at our inventory of vehicles!</p>
+        <div class="vehicle-grid">
+            <% vehicles.forEach(vehicle => { %>
+                <div class="vehicle-card">
+                    <img src="<%= vehicle.image_url || '/images/vehicles/imageComingSoon.jpg' %>"
+                        alt="<%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %>"
+                        class="vehicle-image">
+                    <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
+                    <p class="text-secondary"> <%= vehicle.category_name || 'Uncategorized' %></p>
+                    <p>$<%= vehicle.price %></p>
+                    <p><%= vehicle.description %></p>
+                </div>
+            <% }); %>
         </div>
-    <% }); %>
+    </div>
 </main>
 <%- include('partials/footer') %>

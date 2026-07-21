@@ -22,7 +22,17 @@ app.get("/", (req, res) => {
 // Inventory Page
 app.get("/inventory", async (req, res) => {
     try {
-        const result = await pool.query("SELECT * FROM vehicles");
+        const result = await pool.query(`
+            SELECT vehicles.*, 
+            categories.name AS category_name,
+            vehicle_images.image_url
+            FROM vehicles
+            LEFT JOIN categories ON vehicles.category_id = categories.id
+            LEFT JOIN vehicle_images
+                ON vehicles.id = vehicle_images.vehicle_id
+                AND vehicle_images.is_primary = true
+            ORDER BY vehicles.created_at DESC
+            `);
         res.render("inventory", {vehicles: result.rows });
     } catch (err) {
         console.error(err);
