@@ -1,6 +1,6 @@
 import express from 'express';
 import { showHome, showFinancing, showTradein, showAbout, showContact } from './pages.js';
-import { showInventory } from './vehicles.js';
+import { showInventory, showVehicleDetail } from './vehicles.js';
 import { showSignupForm, handleSignup, showLoginForm, handleLogin, handleLogout } from './auth.js';
 
 const router = express.Router();
@@ -16,5 +16,6 @@ router.post('signup', handleSignup);
 router.get('/login', showLoginForm);
 router.post('/login', handleLogin);
 router.post('/logout', handleLogout);
+router.get('/vehicle/:id', showVehicleDetail);
 
 export default router;

@@ -70,6 +70,10 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     max-width: 600px;
+    a {
+        text-decoration: none;
+        color: var(--color-accent);
+    }
 }
 
 .vehicle-card h2 {
@@ -137,4 +141,36 @@ nav a:hover {
 .form-error {
     color: #DC2626;
     font-weight: bold;
+}
+
+.vehicle-details {
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+
+    a {
+        color: var(--color-accent);
+        text-decoration: none;
+    }
+}
+
+.vehicle-detail-images {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.detail-image {
+    margin: 0 auto;
+    max-width: 300px;
+    border-radius: 8px;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent);
 }

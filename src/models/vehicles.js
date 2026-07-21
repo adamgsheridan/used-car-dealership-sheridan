@@ -27,3 +27,21 @@ export async function getAllCategories() {
     const result = await pool.query('SELECT * FROM categories ORDER BY name');
     return result.rows;
 }
+
+export async function getVehicleById(id) {
+    const result = await pool.query(`
+        SELECT vehicles.*, categories.name AS category_name
+        FROM vehicles
+        LEFT JOIN categories ON vehicles.category_id = categories.id
+        WHERE vehicles.id = $1
+    `, [id]);
+    return result.rows[0];
+}
+
+export async function getImagesByVehicleId(id) {
+    const result = await pool.query(`
+        SELECT * FROM vehicle_images WHERE vehicle_id = $1
+    `, [id]);
+
+    return result.rows;
+}

@@ -19,10 +19,12 @@
         <div class="vehicle-grid">
             <% vehicles.forEach(vehicle => { %>
                 <div class="vehicle-card">
-                    <img src="<%= vehicle.image_url || '/images/vehicles/imageComingSoon.jpg' %>"
-                        alt="<%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %>"
-                        class="vehicle-image">
-                    <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
+                    <a href="/vehicle/<%= vehicle.id %>">
+                        <img src="<%= vehicle.image_url || '/images/vehicles/imageComingSoon.jpg' %>"
+                            alt="<%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %>"
+                            class="vehicle-image">
+                        <h2><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h2>
+                    </a>
                     <p class="text-secondary"> <%= vehicle.category_name || 'Uncategorized' %></p>
                     <p>$<%= vehicle.price %></p>
                     <p><%= vehicle.description %></p>

@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+<main>
+    <div class="vehicle-details">
+        <h1><%= vehicle.year %> <%= vehicle.make %> <%= vehicle.model %></h1>
+        <p class="text-secondary"><%= vehicle.category_name || 'Uncategorized' %></p>
+        <div class="vehicle-detail-images">
+            <% if (images.length > 0) { %>
+                <% images.forEach(img => { %>
+                    <img src="<%= img.image_url %>" alt="<%= vehicle.make %> <%= vehicle.model %>" class="detail-image">
+                <% }); %>
+            <% } else { %>
+                <img src="/images/vehicles/imageComingSoon.jpg" alt="No image available" class="detail-image">
+            <% } %>
+        </div>
+
+        <p class="price">$<%= vehicle.price %></p>
+        <p><strong>Mileage:</strong> <%= vehicle.mileage %> miles</p>
+        <p><%= vehicle.description %></p>
+
+        <a href="/inventory" class="btn">Back to Inventory</a>
+    </div>
+</main>
+<%- include('partials/footer') %>
