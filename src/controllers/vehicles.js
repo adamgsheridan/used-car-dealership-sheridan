@@ -1,4 +1,5 @@
 import { getVehicles, getAllCategories, getVehicleById, getImagesByVehicleId } from '../models/vehicles.js';
+import { getReviewsByVehicleId } from '../models/reviews.js';
 
 export async function showInventory(req, res, next) {
     try {
@@ -26,8 +27,9 @@ export async function showVehicleDetail(req, res, next) {
         }
 
         const images = await getImagesByVehicleId(id);
+        const reviews = await getReviewsByVehicleId(id);
 
-        res.render('vehicle-details', { vehicle, images });
+        res.render('vehicle-details', { vehicle, images, reviews });
     } catch (err) {
         next(err);
     }

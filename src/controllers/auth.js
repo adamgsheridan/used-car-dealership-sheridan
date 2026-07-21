@@ -1,4 +1,4 @@
-import { createUser, findUserByEmail } from '../models/users.js';
+import { createUser, findUserByEmail, verifyPassword } from '../models/users.js';
 
 export function showSignupForm(req, res) {
     res.render('forms/signup', { error: null });
@@ -41,7 +41,7 @@ export async function handleLogin(req, res, next) {
 
         const user = await findUserByEmail(email);
 
-        if (!isUser) {
+        if (!user) {
             return res.render('forms/login', { error: 'Invalid email or password.' });
         }
 

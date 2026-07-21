@@ -18,6 +18,47 @@
         <p><%= vehicle.description %></p>
 
         <a href="/inventory" class="btn">Back to Inventory</a>
+
+        <hr>
+
+        <h2>Reviews</h2>
+
+        <% if (reviews.length === 0) { %>
+            <p>No reviews yet. Be the first to leave one!</p>
+        <% } %>
+
+        <% reviews.forEach(review => { %>
+            <div class="review-card">
+                <p><strong><%= review.first_name %> <%= review.last_name %></strong> - <%= review.rating %>/5</p>
+                <p><%= review.comment %></p>
+                <% if (user && user.id === review.user_id) { %>
+                    <form action="/vehicle/<%= vehicle.id %>/reviews/<%=review.id %>/delete" method="POST">
+                        <button type="submit" class="btn-small">Delete</button>
+                    </form>
+                <% } %>
+            </div>
+        <% }); %>
+
+        <% if (user) { %>
+            <h3>Leave a Review</h3>
+            <form action="/vehicle/<%= vehicle.id %>/reviews" method="POST" class="review-form">
+                <label for="rating">Rating</label>
+                <select name="rating" id="rating" required>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Average</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="1">1 - Terrible</option>
+                </select>
+
+                <label for="comment">Comment</label>
+                <textarea name="comment" id="comment" required minlength="1"></textarea>
+                
+                <button class="submit-btn" type="submit" class="btn">Submit Review</button>
+            </form>
+        <% } else { %>
+            <p><a href="/login">Log in</a> to leave a review.</p>
+        <% } %>
     </div>
 </main>
 <%- include('partials/footer') %>
