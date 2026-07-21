@@ -22,18 +22,34 @@ app.get("/", (req, res) => {
 // Inventory Page
 app.get("/inventory", async (req, res) => {
     try {
-        const result = await pool.query(`
+        const { category } = req.query;
+        let query = `
             SELECT vehicles.*, 
-            categories.name AS category_name,
-            vehicle_images.image_url
+                categories.name AS category_name,
+                vehicle_images.image_url
             FROM vehicles
             LEFT JOIN categories ON vehicles.category_id = categories.id
             LEFT JOIN vehicle_images
                 ON vehicles.id = vehicle_images.vehicle_id
                 AND vehicle_images.is_primary = true
-            ORDER BY vehicles.created_at DESC
-            `);
-        res.render("inventory", {vehicles: result.rows });
+        `;
+        const params = [];
+
+        if (category) {
+            query += ` WHERE categories.name = $1`;
+            params.push(category);
+        }
+
+        query += ` ORDER BY vehicles.created_at DESC`;
+
+        const result = await pool.query(query, params);
+        const categoriesResult = await pool.query(`SELECT * FROM categories ORDER BY name`);
+
+        res.render("inventory", {
+            vehicles: result.rows,
+            categories: categoriesResult.rows,
+            selectedCategory: category || null
+        });
     } catch (err) {
         console.error(err);
         res.status(500).send("Error loading inventory");

@@ -3,6 +3,19 @@
     <div class="inventory-title">
         <h1>Inventory Page</h1>
         <p>Come look at our inventory of vehicles!</p>
+        <div class="category-filters">
+            <form action="/inventory" method="GET">
+                <label for="category-select">Filter by category:</label>
+                <select name="category" id="category-select" onchange="this.form.submit()">
+                    <option value="" <%= !selectedCategory ? 'selected' : '' %>>All</option>
+                    <% categories.forEach(cat => { %>
+                        <option value="<%= cat.name %>" <%= selectedCategory === cat.name ? 'selected' : '' %>>
+                            <%= cat.name %>
+                        </option>
+                    <% }); %>
+                </select>
+            </form>
+        </div>
         <div class="vehicle-grid">
             <% vehicles.forEach(vehicle => { %>
                 <div class="vehicle-card">
