@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="dashboard">
+        <h1>My Service Requests</h1>
+
+        <% if (requests.length === 0) { %>
+            <p>You haven't submitted any service requests yet.</p>
+        <% } %>
+
+        <% requests.forEach(req => { %>
+            <div class="request-card">
+                <p>
+                    <strong><%= req.vehicle_id ? `${req.year} ${req.make} ${req.model}` : 'General Request' %></strong>
+                    -<span class="status-badge status-<%= req.status %>"><%= req.status %></span>
+                </p>
+                <p><%= req.description %></p>
+                <p class="text-secondary">Submitted <%= new Date(req.requested_at).toLocaleDateString() %></p>
+            </div>
+        <% }); %>
+        <a href="/service-requests/" class="btn">Request New Service</a>
+    </div>
+</main>
+<%- include('../partials/footer') %>

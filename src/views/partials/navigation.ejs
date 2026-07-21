@@ -10,6 +10,7 @@
                 
                 <% if (user) { %>
                     <li>Welcome <%= user.first_name %></li>
+                    <li><a href="/dashboard/service-request">My Service Requests</a></li>
                     <li>
                         <form action="/logout" method="POST" style="display: inline;">
                             <button class="logout-btn" type="submit" class="nav-logout-btn">Logout</button>

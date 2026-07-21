@@ -4,6 +4,7 @@ import { showInventory, showVehicleDetail } from './vehicles.js';
 import { showSignupForm, handleSignup, showLoginForm, handleLogin, handleLogout } from './auth.js';
 import { submitReview, removeReview } from './reviews.js';
 import { isLoggedIn } from '../middleware/auth.js';
+import { showServiceRequestForm, handleServiceRequest, showMyServiceRequests } from './serviceRequests.js';
 
 const router = express.Router();
 
@@ -19,8 +20,10 @@ router.get('/login', showLoginForm);
 router.post('/login', handleLogin);
 router.post('/logout', handleLogout);
 router.get('/vehicle/:id', showVehicleDetail);
-router.get('/vehicle/:id', showVehicleDetail);
 router.post('/vehicle/:id/reviews', isLoggedIn, submitReview);
 router.post('/vehicle/:id/reviews/:reviewId/delete', isLoggedIn, removeReview);
+router.get('/service-requests', isLoggedIn, showServiceRequestForm);
+router.post('/service-requests', isLoggedIn, handleServiceRequest);
+router.get('/dashboard/service-requests', isLoggedIn, showMyServiceRequests);
 
 export default router;

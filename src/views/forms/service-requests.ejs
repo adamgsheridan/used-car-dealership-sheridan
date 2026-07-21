@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="auth-form">
+        <h1>Request Service</h1>
+
+        <% if (error) { %>
+            <p class="form-error"><%= error %></p>
+        <% } %>
+
+        <form action="/service-requests" method="POST">
+            <label for="vahicleId">Vehicle (optional)</label>
+            <select name="vehicleId" id="vehicleId">
+                <option value="">Not Vehicle-Specific</option>
+                <% vehicles.forEach(v => { %>
+                    <option value="<%= v.id %>"><%= v.year %> <%= v.make %> <%= v.model %> <%= v.model %></option>
+                <% }); %>
+            </select>
+            <label for="description">Describe the service needed</label>
+            <textarea name="description" id="description" required minlength="1"></textarea>
+            
+            <button type="submit" class="btn">Submit Request</button>
+        </form>
+    </div>
+</main>
+<%- include('../partials/footer') %>
