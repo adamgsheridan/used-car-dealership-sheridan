@@ -1,9 +1,9 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import session from 'express-session';
 import routes from './src/controllers/routes.js';
 import { notFoundHandler, errorHandler } from './src/middleware/errorHandler.js';
-import session from 'express-session';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,11 +14,6 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
-
-app.use('/', routes);
-
-app.use(notFoundHandler);
-app.use(errorHandler);
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,6 +26,16 @@ app.use(session({
         httpOnly: true,
     }
 }));
+
+app.use((req, res, next) => {
+    res.locals.user = req.session.user || null;
+    next();
+})
+
+app.use('/', routes);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
