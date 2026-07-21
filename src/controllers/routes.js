@@ -1,10 +1,11 @@
 import express from 'express';
-import { showHome, showFinancing, showTradein, showAbout, showContact } from './pages.js';
+import { showHome, showFinancing, showTradein, showAbout } from './pages.js';
 import { showInventory, showVehicleDetail } from './vehicles.js';
 import { showSignupForm, handleSignup, showLoginForm, handleLogin, handleLogout } from './auth.js';
 import { submitReview, removeReview } from './reviews.js';
 import { isLoggedIn } from '../middleware/auth.js';
 import { showServiceRequestForm, handleServiceRequest, showMyServiceRequests } from './serviceRequests.js';
+import { showContactForm, handleContactForm } from './contact.js';
 
 const router = express.Router();
 
@@ -13,7 +14,6 @@ router.get('/inventory', showInventory);
 router.get('/financing', showFinancing);
 router.get('/tradein', showTradein);
 router.get('/about', showAbout);
-router.get('/contact', showContact);
 router.get('/signup', showSignupForm);
 router.post('/signup', handleSignup);
 router.get('/login', showLoginForm);
@@ -25,5 +25,7 @@ router.post('/vehicle/:id/reviews/:reviewId/delete', isLoggedIn, removeReview);
 router.get('/service-requests', isLoggedIn, showServiceRequestForm);
 router.post('/service-requests', isLoggedIn, handleServiceRequest);
 router.get('/dashboard/service-requests', isLoggedIn, showMyServiceRequests);
+router.get('/contact', showContactForm);
+router.post('/contact', handleContactForm);
 
 export default router;

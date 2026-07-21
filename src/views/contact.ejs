@@ -1,6 +1,29 @@
 <%- include('partials/header') %>
 <main>
-    <h1>Contact Page</h1>
-    <p>Give us feedback!</p>
+    <div class="auth-form">
+        <h1>Contact Page</h1>
+        <p>Give us feedback!</p>
+
+        <% if (success) { %>
+            <p class="form-success">Thanks for reaching out! We'll get back to you soon.</p>
+        <% } %>
+
+        <% if (error) { %>
+            <p class="form-error"><%= error %></p>
+        <% } %>
+
+        <form action="/contact" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea name="message" id="message" required minlength="1"></textarea>
+
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
 </main>
 <%- include('partials/footer') %>
