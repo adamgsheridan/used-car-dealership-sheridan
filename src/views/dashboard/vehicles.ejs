@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="dashboard">
+        <h1>Manage Vehicles</h1>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% vehicles.forEach(v => { %>
+                    <tr>
+                        <td><%= v.year %> <%= v.make %> <%= v.model %></td>
+                        <td>$<%= v.price %></td>
+                        <td><%= v.category_name || 'Uncategorized' %></td>
+                        <td><a href="/dashboard/vehicles/<%= v.id %>/edit">Edit</a></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</main>
+<%- include('../partials/footer') %>

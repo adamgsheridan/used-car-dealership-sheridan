@@ -45,3 +45,14 @@ export async function getImagesByVehicleId(id) {
 
     return result.rows;
 }
+
+export async function updateVehicle(id, {make, model, year, price, mileage, description, categoryId }) {
+    const result = await pool.query(`
+        UPDATE vehicles
+        SET make = $1, model = $2, year = $3, price = $4, mileage = $5, description = $6, category_id = $7
+        WHERE id = $8
+        RETURNING *
+        `, [make, model, year, price, mileage, description, categoryId || null, id]);
+
+        return result.rows[0];
+}

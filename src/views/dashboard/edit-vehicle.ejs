@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="auth-form">
+        <h1>Edit Vehicle</h1>
+
+        <% if (error) { %>
+            <p class="form-error"><%= error %></p>
+        <% } %>
+
+        <form action="/dashboard/vehicles/<%= vehicle.id %>/edit" method="POST">
+            <label for="make">Make</label>
+            <input type="text" id="make" name="make" value="<%= vehicle.make %>" required>
+
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model" value="<%= vehicle.model %>" required>
+
+            <label for="year">Year</label>
+            <input type="number" id="year" name="year" value="<%= vehicle.year %>" required>
+
+            <label for="price">Price</label>
+            <input type="number" step="0.01" id="price" name="price" value="<%= vehicle.price %>" required>
+
+            <label for="mileage">Mileage</label>
+            <input type="number" id="mileage" name="mileage" value="<%= vehicle.mileage %>">
+
+            <label for="categoryId">Category</label>
+            <select name="categoryId" id="categoryId">
+                <option value="">Uncategorized</option>
+                <% categories.forEach(cat => { %>
+                    <option value="<%= cat.id %>" <%= vehicle.category_id === cat.id ? 'selected' : '' %>>
+                        <%= cat.name %>
+                    </option>
+                <% }); %>
+            </select>
+
+            <label for="description">Description</label>
+            <textarea name="description" id="description"><%= vehicle.description %></textarea>
+
+            <button type="submit" class="btn">Save Changes</button>
+        </form>
+    </div>
+</main>
+<%- include('../partials/footer') %>

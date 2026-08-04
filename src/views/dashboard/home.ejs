@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="dashboard">
+        <h1>Employee Dashboard</h1>
+        <p>Welcome, <%= user.first_name %> (<%= user.role %>)</p>
+
+        <div class="dashboard-links">
+            <a href="/dashboard/vehicles" class="btn">Manage Vehicles</a>
+            <a href="/dashboard/reviews" class="btn">Moderate Reviews</a>
+            <a href="/dashboard/service-requests-admin" class="btn">Manage Service Requests</a>
+            <a href="/dashboard/contact-messages" class="btn">View Contact Messages</a>
+            <% if (user.role === 'admin') { %>
+                <a href="/dashboard/categories" class="btn">Manage Categories</a>
+                <a href="/dashboard/employees" class="btn">Manage Employees</a>
+            <% } %>
+        </div>
+    </div>
+</main>
+<%- include('../partials/footer') %>

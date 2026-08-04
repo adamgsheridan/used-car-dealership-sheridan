@@ -227,3 +227,24 @@ nav a:hover {
     background-color: var(--color-text);
     color: var(--color-button)
 }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.admin-table th, .admin-table td {
+    text-align: left;
+    padding: 0.6rem;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.admin-table th {
+    background-color: #F3F4F6;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent);
+}

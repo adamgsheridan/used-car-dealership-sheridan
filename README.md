@@ -5,7 +5,7 @@ Database Schema:
 [image of ERD exported from pgAdmin showing the tables and relationships]
 
 User Roles:
-Admin:
+Admin: admin@example.com
 User:
 
 Test Account Credentials:
