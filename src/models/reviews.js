@@ -33,3 +33,16 @@ export async function getReviewById(id) {
 export async function deleteReview(id) {
     await pool.query(`DELETE FROM reviews WHERE id = $1`, [id]);
 }
+
+export async function getAllReviews() {
+    const result = await pool.query(`
+        SELECT reviews.*, users.first_name, users.last_name,
+        vehicles.make, vehicles.model, vehicles.year
+        FROM reviews
+        JOIN users ON reviews.user_id = users.id
+        JOIN vehicles ON reviews.vehicle_id = vehicles.id
+        ORDER BY reviews.created_at DESC
+    `);
+    
+    return result.rows;
+}

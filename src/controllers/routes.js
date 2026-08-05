@@ -7,6 +7,7 @@ import { isLoggedIn, isEmployee } from '../middleware/auth.js';
 import { showServiceRequestForm, handleServiceRequest, showMyServiceRequests } from './serviceRequests.js';
 import { showContactForm, handleContactForm } from './contact.js';
 import { showDashboardHome } from './dashboard.js';
+import { showModerateReviews, moderateDeleteReview } from './reviews.js';
 
 const router = express.Router();
 
@@ -32,5 +33,7 @@ router.get('/dashboard', isEmployee, showDashboardHome);
 router.get('/dashboard/vehicles', isEmployee, showManageVehicles);
 router.get('/dashboard/vehicles/:id/edit', isEmployee, showEditVehicleForm);
 router.post('/dashboard/vehicles/:id/edit', isEmployee, handleEditVehicle);
+router.get('/dashboard/reviews', isEmployee, showModerateReviews);
+router.post('/dashboard/reviews/:reviewId/delete', isEmployee, moderateDeleteReview);
 
 export default router;

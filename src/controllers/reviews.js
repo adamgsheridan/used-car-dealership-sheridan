@@ -1,4 +1,4 @@
-import { createReview, getReviewById, deleteReview } from '../models/reviews.js';
+import { createReview, getReviewById, deleteReview, getAllReviews } from '../models/reviews.js';
 
 export async function submitReview(req, res, next) {
     try {
@@ -36,6 +36,26 @@ export async function removeReview(req, res, next) {
         await deleteReview(reviewId);
 
         res.redirect(`/vehicle/${vehicleId}`);
+    } catch (err) {
+        next(err);
+    }
+}
+
+export async function showModerateReviews(req, res, next) {
+    try {
+        const reviews = await getAllReviews();
+        res.render('dashboard/reviews', { reviews});
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+export async function moderateDeleteReview(req, res, next) {
+    try {
+        const { reviewId } = req.params;
+        await deleteReview(reviewId);
+        res.redirect('/dashboard/reviews');
     } catch (err) {
         next(err);
     }

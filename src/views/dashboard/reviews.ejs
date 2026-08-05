@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="dashboard">
+        <h1>Moderate Reviews</h1>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>User</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reviews.forEach(review => { %>
+                <tr>
+                    <td><%= review.year %> <%= review.make %> <%= review.model %> <%= review.model %></td>
+                    <td><%= review.first_name %> <%= review.last_name %></td>
+                    <td><%= review.rating %></td>
+                    <td><%= review.comment %></td>
+                    <td>
+                        <form action="/dashboard/reviews/<%= review.id %>/delete" method="POST">
+                            <button type="submit" class="btn-small">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <% if (reviews.length === 0) { %>
+            <p>No reviews to moderate.</p>
+        <% } %>
+    </div>
+</main>
+<%- include('../partials/footer') %>
