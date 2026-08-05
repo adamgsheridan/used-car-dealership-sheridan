@@ -1,4 +1,4 @@
-import { createServiceRequest, getServiceRequestsByUserId } from '../models/serviceRequests.js';
+import { createServiceRequest, getServiceRequestsByUserId, getAllServiceRequests, updateServiceRequestStatus } from '../models/serviceRequests.js';
 import { getVehicles } from '../models/vehicles.js';
 
 export async function showServiceRequestForm(req, res, next) {
@@ -37,6 +37,32 @@ export async function showMyServiceRequests(req, res, next) {
         const requests = await getServiceRequestsByUserId(userId);
 
         res.render('dashboard/service-requests', { requests });
+    } catch (err) {
+        next(err);
+    }
+}
+
+export async function showManageServiceRequests(req, res, next) {
+    try {
+        const requests = await getAllServiceRequests();
+        res.render('dashboard/service-requests-admin', { requests });
+    } catch (err) {
+        next(err);
+    }
+}
+
+export async function handleUpdateStatus(req, res, next) {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const validStatuses = ['pending', 'in_progress', 'completed', 'cancelled'];
+        if (!validStatuses.includes(status)) {
+            return res.status(400).send('Invalid status');
+        }
+
+        await updateServiceRequestStatus(id, status);
+        res.redirect('/dashboard/service-requests-admin');
     } catch (err) {
         next(err);
     }

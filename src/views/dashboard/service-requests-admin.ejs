@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+<main>
+    <div class="dashboard">
+        <h1>Manage Service Requests</h1>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% requests.forEach(req => { %>
+                    <tr>
+                        <td><%= req.first_name %> <%= req.last_name %></td>
+                        <td><%= req.vehicle_id ? `${req.year} ${req.make} ${req.model}` : 'General' %></td>
+                        <td><%= req.description %></td>
+                        <td>
+                            <form action="/dashboard/service-requests-admin/<%= req.id %>/status" method="POST">
+                                <select name="status">
+                                    <option value="pending" <%= req.status === 'pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="in_progress" <%= req.status === 'in_progress' ? 'selected' : '' %>>In Progress</option>
+                                    <option value="completed" <%= req.status === 'completed' ? 'selected' : '' %>>Completed</option>
+                                    <option value="cancelled" <%= req.status === 'cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                </select>
+                                <button type="submit" class="btn-small">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% if (requests.length === 0) { %>
+            <p>No service requests yet.</p>
+        <% } %>
+    </div>
+</main>
+<%- include('../partials/footer') %>

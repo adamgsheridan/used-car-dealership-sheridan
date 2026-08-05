@@ -4,7 +4,7 @@ import { showInventory, showVehicleDetail, showManageVehicles, showEditVehicleFo
 import { showSignupForm, handleSignup, showLoginForm, handleLogin, handleLogout } from './auth.js';
 import { submitReview, removeReview } from './reviews.js';
 import { isLoggedIn, isEmployee } from '../middleware/auth.js';
-import { showServiceRequestForm, handleServiceRequest, showMyServiceRequests } from './serviceRequests.js';
+import { showServiceRequestForm, handleServiceRequest, showMyServiceRequests, showManageServiceRequests, handleUpdateStatus } from './serviceRequests.js';
 import { showContactForm, handleContactForm } from './contact.js';
 import { showDashboardHome } from './dashboard.js';
 import { showModerateReviews, moderateDeleteReview } from './reviews.js';
@@ -35,5 +35,7 @@ router.get('/dashboard/vehicles/:id/edit', isEmployee, showEditVehicleForm);
 router.post('/dashboard/vehicles/:id/edit', isEmployee, handleEditVehicle);
 router.get('/dashboard/reviews', isEmployee, showModerateReviews);
 router.post('/dashboard/reviews/:reviewId/delete', isEmployee, moderateDeleteReview);
+router.get('/dashboard/service-requests-admin', isEmployee, showManageServiceRequests);
+router.post('/dashboard/service-requests-admin/:id/status', isEmployee, handleUpdateStatus);
 
 export default router;

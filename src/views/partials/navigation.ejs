@@ -10,7 +10,7 @@
                 
                 <% if (user) { %>
                     <li>Welcome <%= user.first_name %></li>
-                    <li><a href="/dashboard/service-request">My Service Requests</a></li>
+                    <li><a href="/dashboard/service-requests">My Service Requests</a></li>
                     <% if (user.role === 'employee' || user.role === 'admin') { %>
                         <li><a href="/dashboard">Employee Dashboard</a></li>
                     <% } %>
